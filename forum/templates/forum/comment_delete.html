@@ -1,0 +1,17 @@
+{% extends "forum/base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Usuwanie komentarza</legend>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-danger mx-auto" type="submit">Usuń</button>
+                <a class="btn btn-secondary mx-auto" href="{% url 'thread-detail' object.thread.id %}">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "forum/base.html" %}
+{% block content %}
+<section>
+  {% for forum in forums %}
+  <div class="list-group mb-4">
+    <div class="list-group-item">
+      <a class="h5 links font-weight-bold" href="{% url 'subforum-detail' forum.id %}">{{ forum.name }}</a>
+    </div>
+    {% for subforum in forum.subforums %}
+    <div class="list-group-item">
+      <div class="row align-items-center">
+        <div class="col-md-auto forum-icon">
+          <img class="mr-2" src="{{ subforum.icon.url }}" alt="icon">
+          <a class="links" href="{% url 'subforum-detail' subforum.id %}">{{ subforum.name }}</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</section>
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "forum/base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-auto text-center">
+                        <img class="rounded-circle mb-1" src="{{ author.profile.image.url }}" alt="{{ user.username }}">
+                        <br>
+                        {{ object.author }}
+                    </div>
+                    <div class="col-auto mt-2">
+                        <h4 class="text-justify">{{ object.title }}</h4>
+                        <small class="text-muted">{{ object.created_at|date:"d F Y, H:i" }}</small>
+                        {% if user == object.author %}
+                        <small class="text-muted ml-2">
+                            <a class="ml-2" href="{% url 'thread-update' object.id %}">Edytuj</a>
+                            <a class="ml-2 text-danger" href="{% url 'thread-delete' object.id %}">Usuń</a>
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="text-justify">
+                    {{object.content}}
+                </div>
+            </div>
+
+            <div class="container mt-4">
+                <a class="btn btn-primary mx-auto float-right" href="{% url 'comment-create' object.id %}">
+                    Dodaj odpowiedź
+                </a>    
+            </div>
+
+
+            {% if comments %}
+            <div class="list-group-item font-weight-bold mt-4">
+                Komentarze
+            </div>
+            {% for comment in comments %}
+            <div class="list-group-item mt-2">
+                <div class="d-flex flex-row mb-4">
+                    <div class="col-auto text-center mt-2">
+                        <img class="rounded-circle mb-1" src="{{ comment.author.profile.image.url }}" alt="{{ user.username }}">
+                        <br>
+                        {{ comment.author }}
+                    </div>
+                    <div class="text-justify m-1 ml-3">
+
+                        {{comment.content}}
+                    </div>
+                </div>
+                <hr class="hr">
+                <small class="text-muted ml-2">{{ comment.created_at|date:"d F Y, H:i" }}</small>
+                {% if user == comment.author %}
+                <small class="text-muted ml-2">
+                    <a class="ml-2" href="{% url 'comment-update' object.id comment.id %}">Edytuj</a>
+                    <a class="ml-2 text-danger" href="{% url 'comment-delete' object.id comment.id %}">Usuń</a>
+                </small>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class="container mt-5 text-center">
+                <h4>W tym wątku nie ma jeszcze komentarzy</h4>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+{% endblock content %}

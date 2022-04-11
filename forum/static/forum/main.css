@@ -1,0 +1,64 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    background: #e1e3e7;
+    color: #333333;
+    margin-top: 5rem;
+}
+
+.navbar-brand {
+    font-family: 'Sriracha', cursive;
+}
+
+.nav-bg-color {
+    background-color: #464866;
+}
+
+.header .navbar-nav .nav-link {
+    color: #cbd5db;
+}
+
+.header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+.header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.links {
+    color: #444444;
+}
+
+.links:hover {
+    color: #513481;
+    text-decoration: none;
+}
+
+.forum-icon img {
+    max-width: 40px;
+    opacity: 0.2;
+}
+
+.btn {
+    background: #464866;
+    border-color: #464866;
+    box-shadow: none;
+    outline: none;
+}
+
+.rounded-circle {
+    width: 75px;
+    height: 75px;
+}
+
+.img-small {
+    width: 30px;
+    height: 30px;
+}
+
+.hr {
+    margin: 0px;
+}

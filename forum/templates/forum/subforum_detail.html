@@ -1,0 +1,81 @@
+{% extends "forum/base.html" %}
+{% block content %}
+<section>
+
+  <div class="list-group">
+    <div class="list-group-item">
+      <h3>{{ object.name }}</h3>
+      {% if object.description %}
+      <hr>
+      <h6 class="text-muted h6 text-justify ml-2 mr-2"> {{ object.description }}</h6>
+      {% endif %}
+  </div>
+
+  <div class="list-group">
+    {% if subforums %}
+    <div class="list-group-item font-weight-bold mt-5">
+      Subfora
+    </div>
+    {% for subforum in subforums %}
+    <div class="list-group-item">
+      <div class="row">
+        <div class="col-md-auto">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+        </div>
+        <div class="col-xl">
+          <a class="links" href="{% url 'subforum-detail' subforum.id %}">{{ subforum.name }}</a>
+        </div>
+        <div class="col-md-auto float-right">
+          {{ subforum.threadsNum }} wątków
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+
+  <div class="list-group mt-5">
+    {% if threads %}
+    <div class="list-group-item font-weight-bold">
+      Wątki
+    </div>
+    {% for thread in threads %}
+    <div class="list-group-item">
+
+      <div class="row d-flex align-items-center justify-content-between">
+        
+        <div class="col-md-auto text-justify">
+          <i class="fa fa-comments mr-2" aria-hidden="true"></i>
+          <a class="links" href="{% url 'thread-detail' thread.id %}">{{ thread.title }}</a>
+        </div>
+
+        <div class="col-md-auto">
+          <img class="rounded-circle img-small mb-1" src="{{ thread.author.profile.image.url }}" alt="{{ user.username }}">
+          {{ thread.author }}
+          <span class="ml-4">{{ thread.commentsNum }} komentarzy</span>
+        </div>
+        
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+
+
+  {% else %}
+  <div class="container mt-4 text-center">
+    <h4>W tym dziale nie ma żadnych wątków</h4>
+  </div>
+  {% endif %}
+
+  <div class="container mt-4 pb-3">
+    <a class="btn btn-primary mx-auto float-right" href="{% url 'thread-create' object.id %}">
+      Rozpocznij wątek
+    </a>
+  </div>
+
+</section>
+{% endblock content %}
+
